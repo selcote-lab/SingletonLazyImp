@@ -6,15 +6,11 @@ public class Singleton {
 
     private Singleton(){ }
 
+    private static class SingletonHelper {
+        private static final Singleton uniqueInstance = new Singleton();
+    }
     public static  Singleton getInstance(){
-
-        if(uniqueInstance == null){
-            synchronized (Singleton.class){
-                uniqueInstance = new Singleton();
-            }
-        }
-
-        return uniqueInstance;
+        return SingletonHelper.uniqueInstance;
     }
 
     public void setData(int data){
