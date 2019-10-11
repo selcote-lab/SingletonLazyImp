@@ -1,15 +1,17 @@
 package com.tonasolution;
 
 public class Singleton {
-    private static Singleton uniqueInstance = null;
+    private static volatile Singleton uniqueInstance = null;
     private int data = 0;
 
     private Singleton(){ }
 
-    public static synchronized Singleton getInstance(){
+    public static  Singleton getInstance(){
 
         if(uniqueInstance == null){
-            uniqueInstance = new Singleton();
+            synchronized (Singleton.class){
+                uniqueInstance = new Singleton();
+            }
         }
 
         return uniqueInstance;
